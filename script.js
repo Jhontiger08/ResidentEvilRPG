@@ -1,5 +1,3 @@
-// script.js
-
 // Função para adicionar um item ao slot
 function addItem(slot) {
     document.getElementById(`file-${slot}`).click();
@@ -13,6 +11,7 @@ function displayImage(input, slot) {
     reader.onload = function (e) {
         document.getElementById(`img-${slot}`).src = e.target.result;
         document.getElementById(`desc-${slot}`).textContent = 'Examinar Item';
+        saveData();
     };
 
     reader.readAsDataURL(file);
@@ -23,6 +22,7 @@ function editDescription(slot) {
     const description = prompt('Examine o item:');
     if (description !== null) {
         document.getElementById(`desc-${slot}`).textContent = description;
+        saveData();
     }
 }
 
@@ -39,6 +39,7 @@ function displayCharacterImage(input) {
 
     reader.onload = function (e) {
         document.getElementById('character-image').src = e.target.result;
+        saveData();
     };
 
     reader.readAsDataURL(file);
@@ -57,6 +58,7 @@ function updateHealth() {
     } else {
         healthBar.style.backgroundColor = 'red';
     }
+    saveData();
 }
 
 // Função para calcular e atualizar os pontos de vida
@@ -67,7 +69,51 @@ function updateHP() {
     document.getElementById('total-hp').value = totalHP;
     document.getElementById('health-value').value = totalHP;
     updateHealth();
+    saveData();
 }
+
+// Função para salvar dados no localStorage
+function saveData() {
+    const data = {
+        items: [],
+        characterImage: document.getElementById('character-image').src,
+        healthValue: document.getElementById('health-value').value,
+        con: document.getElementById('con').value,
+        tam: document.getElementById('tam').value,
+        totalHP: document.getElementById('total-hp').value
+    };
+
+    document.querySelectorAll('.item-slot').forEach((slot, index) => {
+        const imgSrc = document.getElementById(`img-${index + 1}`).src;
+        const desc = document.getElementById(`desc-${index + 1}`).textContent;
+        data.items.push({ imgSrc, desc });
+    });
+
+    localStorage.setItem('gameData', JSON.stringify(data));
+}
+
+// Função para carregar dados do localStorage
+function loadData() {
+    const data = JSON.parse(localStorage.getItem('gameData'));
+    if (data) {
+        document.getElementById('character-image').src = data.characterImage;
+        document.getElementById('health-value').value = data.healthValue;
+        document.getElementById('con').value = data.con;
+        document.getElementById('tam').value = data.tam;
+        document.getElementById('total-hp').value = data.totalHP;
+        updateHealth();
+
+        data.items.forEach((item, index) => {
+            document.getElementById(`img-${index + 1}`).src = item.imgSrc;
+            document.getElementById(`desc-${index + 1}`).textContent = item.desc;
+        });
+    }
+}
+
+// Adicionando evento para carregar os dados quando a página for carregada
+window.onload = function() {
+    loadData();
+};
 
 // Adicione event listeners para mostrar detalhes ao clicar em um slot
 document.querySelectorAll('.item-slot').forEach(slot => {
@@ -78,3 +124,9 @@ document.querySelectorAll('.item-slot').forEach(slot => {
         }
     });
 });
+
+// Adicionar botão para salvar manualmente os dados
+const saveButton = document.createElement('button');
+saveButton.textContent = 'Salvar Dados';
+saveButton.onclick = saveData;
+document.body.appendChild(saveButton);
