@@ -1,4 +1,3 @@
-/* styles.css */
 body {
     font-family: Arial, sans-serif;
     background: url('fundo.jpg') no-repeat center center fixed;
@@ -18,7 +17,8 @@ body {
 
 .header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
@@ -26,9 +26,13 @@ body {
 .health {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 .health-bar {
+    width: 100%;
+    max-width: 300px;
     height: 20px;
     background-color: green;
     margin-right: 10px;
@@ -44,8 +48,9 @@ body {
 }
 
 .character-image-container img {
-    width: 300px;
-    height: 400px;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
     object-fit: cover;
     cursor: pointer;
     border: 1px solid #fff;
@@ -53,8 +58,9 @@ body {
 
 .inventory {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 20px;
+    justify-items: center;
 }
 
 .item-slot {
@@ -63,6 +69,9 @@ body {
     border-radius: 10px;
     padding: 10px;
     position: relative;
+    width: 100%;
+    max-width: 100px;
+    box-sizing: border-box;
 }
 
 .item-slot img {
@@ -110,4 +119,34 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .health-bar {
+        max-width: 200px;
+    }
+
+    .character-image-container img {
+        max-width: 200px;
+    }
+
+    .inventory {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 10px;
+    }
+
+    .item-slot {
+        max-width: 80px;
+    }
 }
