@@ -1,98 +1,196 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventário Resident Evil</title>
+    <title>Inventário Resident Evil - RPG Piel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Inventário Resident Evil</h1>
-        <div class="header">
-            <input type="text" id="character-name" placeholder="Nome do Personagem" class="editable-text">
-            <div class="health">
-                <div id="health-bar" class="health-bar"></div>
-                <input type="number" id="health-value" min="0" max="20" value="20" onchange="updateHealth()" class="editable-text">
+        <div class="header mb-3">
+            <input type="text" id="character-name" placeholder="Nome do Personagem"
+                class="editable-text form-control mb-1">
+            <div class="health row">
+                <div class="col-6">
+                    <div id="health-bar" class="health-bar"></div>
+                </div>
+                <div class="col-6">
+                    <input type="number" id="health-value" min="0" max="20" value="20" onchange="updateHealth()"
+                        class="editable-text form-control">
+                </div>
             </div>
         </div>
 
-        <!-- Campo para imagem do personagem -->
-        <div class="character-image-container">
-            <input type="file" id="character-image-input" style="display:none" accept="image/*" onchange="displayCharacterImage(this)">
-            <img id="character-image" src="" alt="Imagem do Personagem" onclick="document.getElementById('character-image-input').click()">
+        <div class="character-image-container mb-3">
+            <input type="file" id="character-image-input" style="display:none" accept="image/*"
+                onchange="displayCharacterImage(this)">
+            <img id="character-image" src="images/profile.avif" alt="Imagem do Personagem"
+                onclick="document.getElementById('character-image-input').click()">
         </div>
 
-        <!-- Slots de inventário -->
-        <div class="inventory">
-            <div class="item-slot" onclick="addItem('slot1')">
-                <input type="file" id="file-slot1" style="display:none" accept="image/*" onchange="displayImage(this, 'slot1')">
-                <img id="img-slot1" src="" alt="Item Slot 1">
-                <textarea id="desc-slot1" onclick="editDescription('slot1')" class="editable-text">Adicionar Item</textarea>
-                <input type="number" id="ammo-slot1" class="ammo-input editable-text" placeholder="Munição" min="0">
+        <div class="inventory mb-5">
+            <h2>Slots</h2>
+            <div class="row mb-5">
+                <div class="col-12 col-md-3">
+                    <div class="item-slot" onclick="addItem('slot1')">
+                        <input type="file" id="file-slot1" style="display:none" accept="image/*"
+                            onchange="displayImage(this, 'slot1')">
+                        <img id="img-slot1" src="images/slot.png" alt="Item Slot 1">
+                        <textarea id="desc-slot1" onclick="editDescription('slot1')"
+                            class="editable-text form-control mb-2">Adicionar Item</textarea>
+                        <input type="number" id="ammo-slot1" class="ammo-input editable-text form-control"
+                            placeholder="Munição" min="0">
+                    </div>
+                </div>
+                <!-- Replicar mais 7 slots aqui, mudando o id conforme necessário -->
+                <!-- Slot 2 -->
+                <div class="col-12 col-md-3">
+                    <div class="item-slot" onclick="addItem('slot2')">
+                        <input type="file" id="file-slot2" style="display:none" accept="image/*"
+                            onchange="displayImage(this, 'slot2')">
+                        <img id="img-slot2" src="images/slot.png" alt="Item Slot 2">
+                        <textarea id="desc-slot2" onclick="editDescription('slot2')"
+                            class="editable-text form-control mb-2">Adicionar Item</textarea>
+                        <input type="number" id="ammo-slot2" class="ammo-input editable-text form-control"
+                            placeholder="Munição" min="0">
+                    </div>
+                </div>
+                <!-- Slot 3 -->
+                <div class="col-12 col-md-3">
+                    <div class="item-slot" onclick="addItem('slot3')">
+                        <input type="file" id="file-slot3" style="display:none" accept="image/*"
+                            onchange="displayImage(this, 'slot3')">
+                        <img id="img-slot3" src="images/slot.png" alt="Item Slot 3">
+                        <textarea id="desc-slot3" onclick="editDescription('slot3')"
+                            class="editable-text form-control mb-2">Adicionar Item</textarea>
+                        <input type="number" id="ammo-slot3" class="ammo-input editable-text form-control"
+                            placeholder="Munição" min="0">
+                    </div>
+                </div>
+                <!-- Slot 4 -->
+                <div class="col-12 col-md-3">
+                    <div class="item-slot" onclick="addItem('slot4')">
+                        <input type="file" id="file-slot4" style="display:none" accept="image/*"
+                            onchange="displayImage(this, 'slot4')">
+                        <img id="img-slot4" src="images/slot.png" alt="Item Slot 4">
+                        <textarea id="desc-slot4" onclick="editDescription('slot4')"
+                            class="editable-text form-control mb-2">Adicionar Item</textarea>
+                        <input type="number" id="ammo-slot4" class="ammo-input editable-text form-control"
+                            placeholder="Munição" min="0">
+                    </div>
+                </div>
             </div>
-            <!-- Replicar mais 7 slots aqui, mudando o id conforme necessário -->
-            <div class="item-slot" onclick="addItem('slot2')">
-                <input type="file" id="file-slot2" style="display:none" accept="image/*" onchange="displayImage(this, 'slot2')">
-                <img id="img-slot2" src="" alt="Item Slot 2">
-                <textarea id="desc-slot2" onclick="editDescription('slot2')" class="editable-text">Adicionar Item</textarea>
-                <input type="number" id="ammo-slot2" class="ammo-input editable-text" placeholder="Munição" min="0">
-            </div>
-            <div class="item-slot" onclick="addItem('slot3')">
-                <input type="file" id="file-slot3" style="display:none" accept="image/*" onchange="displayImage(this, 'slot3')">
-                <img id="img-slot3" src="" alt="Item Slot 3">
-                <textarea id="desc-slot3" onclick="editDescription('slot3')" class="editable-text">Adicionar Item</textarea>
-                <input type="number" id="ammo-slot3" class="ammo-input editable-text" placeholder="Munição" min="0">
-            </div>
-            <div class="item-slot" onclick="addItem('slot4')">
-                <input type="file" id="file-slot4" style="display:none" accept="image/*" onchange="displayImage(this, 'slot4')">
-                <img id="img-slot4" src="" alt="Item Slot 4">
-                <textarea id="desc-slot4" onclick="editDescription('slot4')" class="editable-text">Adicionar Item</textarea>
-                <input type="number" id="ammo-slot4" class="ammo-input editable-text" placeholder="Munição" min="0">
-            </div>
-            <div class="item-slot" onclick="addItem('slot5')">
-                <input type="file" id="file-slot5" style="display:none" accept="image/*" onchange="displayImage(this, 'slot5')">
-                <img id="img-slot5" src="" alt="Item Slot 5">
-                <textarea id="desc-slot5" onclick="editDescription('slot5')" class="editable-text">Adicionar Item</textarea>
-                <input type="number" id="ammo-slot5" class="ammo-input editable-text" placeholder="Munição" min="0">
-            </div>
-            <div class="item-slot" onclick="addItem('slot6')">
-                <input type="file" id="file-slot6" style="display:none" accept="image/*" onchange="displayImage(this, 'slot6')">
-                <img id="img-slot6" src="" alt="Item Slot 6">
-                <textarea id="desc-slot6" onclick="editDescription('slot6')" class="editable-text">Adicionar Item</textarea>
-                <input type="number" id="ammo-slot6" class="ammo-input editable-text" placeholder="Munição" min="0">
-            </div>
-            <div class="item-slot" onclick="addItem('slot7')">
-                <input type="file" id="file-slot7" style="display:none" accept="image/*" onchange="displayImage(this, 'slot7')">
-                <img id="img-slot7" src="" alt="Item Slot 7">
-                <textarea id="desc-slot7" onclick="editDescription('slot7')" class="editable-text">Adicionar Item</textarea>
-                <input type="number" id="ammo-slot7" class="ammo-input editable-text" placeholder="Munição" min="0">
-            </div>
-            <div class="item-slot" onclick="addItem('slot8')">
-                <input type="file" id="file-slot8" style="display:none" accept="image/*" onchange="displayImage(this, 'slot8')">
-                <img id="img-slot8" src="" alt="Item Slot 8">
-                <textarea id="desc-slot8" onclick="editDescription('slot8')" class="editable-text">Adicionar Item</textarea>
-                <input type="number" id="ammo-slot8" class="ammo-input editable-text" placeholder="Munição" min="0">
+            <div class="row">
+                <!-- Slot 5 -->
+                <div class="col-12 col-md-3">
+                    <div class="item-slot" onclick="addItem('slot5')">
+                        <input type="file" id="file-slot5" style="display:none" accept="image/*"
+                            onchange="displayImage(this, 'slot5')">
+                        <img id="img-slot5" src="images/slot.png" alt="Item Slot 5">
+                        <textarea id="desc-slot5" onclick="editDescription('slot5')"
+                            class="editable-text form-control mb-2">Adicionar Item</textarea>
+                        <input type="number" id="ammo-slot5" class="ammo-input editable-text form-control"
+                            placeholder="Munição" min="0">
+                    </div>
+                </div>
+                <!-- Slot 6 -->
+                <div class="col-12 col-md-3">
+                    <div class="item-slot" onclick="addItem('slot6')">
+                        <input type="file" id="file-slot6" style="display:none" accept="image/*"
+                            onchange="displayImage(this, 'slot6')">
+                        <img id="img-slot6" src="images/slot.png" alt="Item Slot 6">
+                        <textarea id="desc-slot6" onclick="editDescription('slot6')"
+                            class="editable-text form-control mb-2">Adicionar Item</textarea>
+                        <input type="number" id="ammo-slot6" class="ammo-input editable-text form-control"
+                            placeholder="Munição" min="0">
+                    </div>
+                </div>
+                <!-- Slot 7 -->
+                <div class="col-12 col-md-3">
+                    <div class="item-slot" onclick="addItem('slot7')">
+                        <input type="file" id="file-slot7" style="display:none" accept="image/*"
+                            onchange="displayImage(this, 'slot7')">
+                        <img id="img-slot7" src="images/slot.png" alt="Item Slot 7">
+                        <textarea id="desc-slot7" onclick="editDescription('slot7')"
+                            class="editable-text form-control mb-2">Adicionar Item</textarea>
+                        <input type="number" id="ammo-slot7" class="ammo-input editable-text form-control"
+                            placeholder="Munição" min="0">
+                    </div>
+                </div>
+                <!-- Slot 8 -->
+                <div class="col-12 col-md-3">
+                    <div class="item-slot" onclick="addItem('slot8')">
+                        <input type="file" id="file-slot8" style="display:none" accept="image/*"
+                            onchange="displayImage(this, 'slot8')">
+                        <img id="img-slot8" src="images/slot.png" alt="Item Slot 8">
+                        <textarea id="desc-slot8" onclick="editDescription('slot8')"
+                            class="editable-text form-control mb-2">Adicionar Item</textarea>
+                        <input type="number" id="ammo-slot8" class="ammo-input editable-text form-control"
+                            placeholder="Munição" min="0">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Status do Personagem -->
-        <div class="character-stats">
+        <div class="character-stats mb-3">
             <h2>Status do Personagem</h2>
-            <div class="stats-grid">
-                <label>FOR: <input type="number" id="for" onchange="updateHP()" min="1" max="20" class="editable-text"></label>
-                <label>DES: <input type="number" id="des" min="1" max="20" class="editable-text"></label>
-                <label>INT: <input type="number" id="int" min="1" max="20" class="editable-text"></label>
-                <label>CON: <input type="number" id="con" onchange="updateHP()" min="1" max="20" class="editable-text"></label>
-                <label>APA: <input type="number" id="apa" min="1" max="20" class="editable-text"></label>
-                <label>POD: <input type="number" id="pod" min="1" max="20" class="editable-text"></label>
-                <label>TAM: <input type="number" id="tam" onchange="updateHP()" min="1" max="20" class="editable-text"></label>
-                <label>SAN: <input type="number" id="san" min="1" max="99" class="editable-text"></label>
-                <label>EDU: <input type="number" id="edu" min="1" max="20" class="editable-text"></label>
-                <label>Vida Total: <input type="number" id="total-hp" readonly class="editable-text"></label>
+            <div class="row g-3">
+                <div class="col-6 col-md-1 col-lg-1">
+                    <label for="strength" class="form-label">FOR:</label>
+                    <input type="number" id="strength" class="form-control" min="0">
+                </div>
+                <div class="col-6 col-md-1 col-lg-1">
+                    <label for="dexterity" class="form-label">DES:</label>
+                    <input type="number" id="dexterity" class="form-control" min="0">
+                </div>
+                <div class="col-6 col-md-1 col-lg-1">
+                    <label for="intelligence" class="form-label">INT:</label>
+                    <input type="number" id="intelligence" class="form-control" min="0">
+                </div>
+                <div class="col-6 col-md-1 col-lg-1">
+                    <label for="constitution" class="form-label">CON:</label>
+                    <input type="number" id="constitution" class="form-control" min="0">
+                </div>
+                <div class="col-6 col-md-1 col-lg-1">
+                    <label for="appearance" class="form-label">APA:</label>
+                    <input type="number" id="appearance" class="form-control" min="0">
+                </div>
+                <div class="col-6 col-md-1 col-lg-1">
+                    <label for="power" class="form-label">POD:</label>
+                    <input type="number" id="power" class="form-control" min="0">
+                </div>
+                <div class="col-6 col-md-1 col-lg-1">
+                    <label for="size" class="form-label">TAM:</label>
+                    <input type="number" id="size" class="form-control" min="0">
+                </div>
+                <div class="col-6 col-md-1 col-lg-1">
+                    <label for="sanity" class="form-label">SAN:</label>
+                    <input type="number" id="sanity" class="form-control" min="0">
+                </div>
+                <div class="col-6 col-md-1 col-lg-1">
+                    <label for="education" class="form-label">EDU:</label>
+                    <input type="number" id="education" class="form-control" min="0">
+                </div>
+                <div class="col-6 col-md-3 col-lg-3">
+                    <label for="total-health" class="form-label">Vida Total:</label>
+                    <input type="number" id="total-health" class="form-control" min="0">
+                </div>
             </div>
+        </div>
+
+        <!-- Botão Salvar Dados -->
+        <div class="text-center mb-3">
+            <button class="btn btn-primary" onclick="saveData()">Salvar Dados</button>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

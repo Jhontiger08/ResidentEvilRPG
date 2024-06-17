@@ -49,11 +49,14 @@ function displayCharacterImage(input) {
 function updateHealth() {
     const healthValue = document.getElementById('health-value').value;
     const healthBar = document.getElementById('health-bar');
-    healthBar.style.width = `${healthValue * 10}px`;
+    healthBar.style.width = (healthValue * 5) + '%'; // Ajustar conforme a sua lógica de saúde
 
-    if (healthValue >= 7) {
+    // Mudar a cor da barra de saúde conforme o valor
+    if (healthValue > 15) {
         healthBar.style.backgroundColor = 'green';
-    } else if (healthValue >= 3) {
+    } else if (healthValue > 10) {
+        healthBar.style.backgroundColor = 'yellow';
+    } else if (healthValue > 5) {
         healthBar.style.backgroundColor = 'orange';
     } else {
         healthBar.style.backgroundColor = 'red';
